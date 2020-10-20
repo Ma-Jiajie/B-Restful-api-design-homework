@@ -4,6 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 public class StudentsDataBase {
     private static List<Student> students;
@@ -26,12 +27,17 @@ public class StudentsDataBase {
         students.add(new Student("13", "干将莫邪", Gender.Female, ""));
     }
 
-    public List<Student> studentsProvider() {
+    public static List<Student> studentsProvider() {
         if(!isInitialized) makeData();
         return students;
     }
 
-    public void add(Student student) {
+    public static void add(Student student) {
         students.add(student);
+    }
+
+    public static void delete(String id) {
+        Optional<Student> studentDeleted = students.stream().filter(student -> student.getId().equals(id)).findFirst();
+        studentDeleted.ifPresent(stu -> students.remove(stu));
     }
 }
