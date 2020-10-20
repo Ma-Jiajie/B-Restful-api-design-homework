@@ -3,11 +3,12 @@ package com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class StudentsDataBase {
-    private static List<Student> students;
+    private static List<Student> students = new ArrayList<>();
     private static boolean isInitialized = false;
 
     private static void makeData() {

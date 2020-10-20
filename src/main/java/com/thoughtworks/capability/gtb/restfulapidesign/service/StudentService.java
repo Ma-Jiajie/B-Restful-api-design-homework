@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class StudentService {
-
     public List<Student> getAllStudents() {
         return StudentsDataBase.studentsProvider();
     }
