@@ -38,7 +38,6 @@ public class StudentsDataBase {
     }
 
     public static void delete(String id) {
-        Optional<Student> studentDeleted = students.stream().filter(student -> student.getId().equals(id)).findFirst();
-        studentDeleted.ifPresent(stu -> students.remove(stu));
+        students.removeIf(stu -> stu.getId().equals(id));
     }
 }
