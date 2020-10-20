@@ -33,7 +33,7 @@ public class StudentController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/student")
+    @PutMapping("/student")
     public Student addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
         return student;
