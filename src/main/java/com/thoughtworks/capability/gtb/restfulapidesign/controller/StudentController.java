@@ -1,5 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
+import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping
@@ -20,8 +22,10 @@ public class StudentController {
 
     @GetMapping("/students")
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    @ResponseBody
+    public List<Student> getAllStudents(@RequestParam(name = "gender", required = false) String gender) {
+        if(gender == null) return studentService.getAllStudents();
+        return studentService.getAllStudents().stream().filter(stu -> stu.getGender().ordinal() == Integer.parseInt(gender)).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
