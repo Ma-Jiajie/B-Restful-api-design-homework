@@ -6,6 +6,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class StudentsDataBase {
     private static List<Student> students = new ArrayList<>();
@@ -39,5 +40,9 @@ public class StudentsDataBase {
 
     public static void delete(String id) {
         students.removeIf(stu -> stu.getId().equals(id));
+    }
+
+    public static Student findStudentById(String id) {
+        return students.stream().filter(stu -> stu.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 }

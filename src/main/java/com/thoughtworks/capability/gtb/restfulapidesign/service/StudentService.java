@@ -17,4 +17,7 @@ public class StudentService {
     public void delete(String id) {
         StudentsDataBase.delete(id);
     }
+    public Student findStudentById(String id) {
+        return StudentsDataBase.findStudentById(id);
+    }
 }

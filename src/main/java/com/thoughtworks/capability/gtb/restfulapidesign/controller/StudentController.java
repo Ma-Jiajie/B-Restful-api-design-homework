@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +25,10 @@ public class StudentController {
     @GetMapping("/students")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<Student> getAllStudents(@RequestParam(name = "gender", required = false) String gender) {
-        if(gender == null) return studentService.getAllStudents();
+    public List<Student> getAllStudents(@RequestParam(name = "gender", required = false) String gender,
+                                        @RequestParam(name = "id", required = false) String id) {
+        if(gender == null && id == null) return studentService.getAllStudents();
+        if(gender == null) return Collections.singletonList(studentService.findStudentById(id));
         return studentService.getAllStudents().stream().filter(stu -> stu.getGender().ordinal() == Integer.parseInt(gender)).collect(Collectors.toList());
     }
 
