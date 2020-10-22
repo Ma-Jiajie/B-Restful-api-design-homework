@@ -22,8 +22,14 @@ public class TeamStudentInit {
         Team team5 = new Team("1","team 1","",team5Stus);
         List<Student> team6Stus = new ArrayList<>();
         Team team6 = new Team("1","team 1","",team6Stus);
+        teams.add(team1);
+        teams.add(team2);
+        teams.add(team3);
+        teams.add(team4);
+        teams.add(team5);
+        teams.add(team6);
     }
-    public static List<Team> initTeams() {
+    public static List<Team> getAllTeams() {
         if(!isInited) makeTeams();
         return teams;
     }
