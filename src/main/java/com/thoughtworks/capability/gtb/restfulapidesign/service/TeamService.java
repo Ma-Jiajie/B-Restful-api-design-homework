@@ -1,6 +1,5 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest.StudentsDataBase;
 import com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest.TeamStudentInit;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
 import org.springframework.stereotype.Service;
@@ -15,10 +14,13 @@ public class TeamService {
     public TeamService() {
         teams = TeamStudentInit.initTeams();
     }
-    public void separate() {
-        //分组
-        for(int index=0,teamNo=0;index < StudentsDataBase.studentsProvider().size();index++) {
-
-        }
+    public List<Team> initTeams() {
+        return teams;
+    }
+    public Team getTeamByid(String id) {
+        return teams.stream().filter(team -> team.getId().equals(id)).findFirst().get();
+    }
+    public Team updateTeamById(String id, String name) throws Exception {
+        return TeamStudentInit.updateTeamByIdWithName(id, name);
     }
 }

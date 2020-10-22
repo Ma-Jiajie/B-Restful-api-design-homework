@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StudentsDataBase {
-    private static List<Student> students = new ArrayList<>();
+    private static final List<Student> students = new ArrayList<>();
     private static boolean isInitialized = false;
 
     private static void makeData() {
@@ -46,6 +46,6 @@ public class StudentsDataBase {
 
     public static Student findStudentById(String id) {
         if(!isInitialized) makeData();
-        return students.stream().filter(stu -> stu.getId().equals(id)).collect(Collectors.toList()).get(0);
+        return students.stream().filter(stu -> stu.getId().equals(id)).findFirst().orElse(null);
     }
 }
