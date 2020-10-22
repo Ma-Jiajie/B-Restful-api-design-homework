@@ -18,7 +18,7 @@ public class StudentService {
         addStudent(student);
     }
     public void addStudent(Student student) {
-        if(StudentsDataBase.findStudentById(student.getId()) == null) throw new UserIsExistingException("该用户已存在");
+        if(StudentsDataBase.findStudentById(student.getId()) != null) throw new UserIsExistingException("该用户已存在");
         StudentsDataBase.add(student);
     }
     public void delete(String id) {

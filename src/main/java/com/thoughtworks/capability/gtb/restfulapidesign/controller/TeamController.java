@@ -1,6 +1,7 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.controller.requestdto.TeamRequestDTO;
+import com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest.TeamStudentInit;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
@@ -19,6 +20,7 @@ public class TeamController {
 
     private final StudentService studentService;
     private final TeamService teamService;
+
     public TeamController(StudentService studentService, TeamService teamService) {
         this.studentService=studentService;
         this.teamService=teamService;
@@ -26,6 +28,7 @@ public class TeamController {
 
     @GetMapping("/Teams")
     public List<Team> separate() {
+        TeamStudentInit.clearTeamStudents();
         List<Student> students = studentService.getAllStudents();
         Collections.shuffle(students);
         List<Team> teams = teamService.initTeams();

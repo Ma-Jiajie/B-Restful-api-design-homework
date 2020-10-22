@@ -54,4 +54,10 @@ public class TeamStudentInit {
         teams.add(team);
         return team;
     }
+
+    public static void clearTeamStudents() {
+        for(Team team: teams) {
+            team.getStudent().clear();
+        }
+    }
 }
