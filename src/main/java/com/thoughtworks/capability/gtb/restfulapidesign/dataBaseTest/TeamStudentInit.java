@@ -2,6 +2,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
+import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.TeamNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class TeamStudentInit {
         if(!isInited) makeTeams();
         Team team = findTeamById(id);
         deleteTeam(id);
+        if(team == null) throw new TeamNotFoundException("该组不存在");
         team.setName(name);
         teams.add(team);
         return team;

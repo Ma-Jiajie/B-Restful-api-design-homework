@@ -2,6 +2,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest.TeamStudentInit;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
+import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.TeamNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,9 +19,11 @@ public class TeamService {
         return teams;
     }
     public Team getTeamByid(String id) {
-        return teams.stream().filter(team -> team.getId().equals(id)).findFirst().get();
+        Team team = teams.stream().filter(te -> te.getId().equals(id)).findFirst().orElse(null);
+        if(team == null) throw new TeamNotFoundException("该组不存在");
+        return team;
     }
-    public Team updateTeamById(String id, String name) throws Exception {
+    public Team updateTeamById(String id, String name){
         return TeamStudentInit.updateTeamByIdWithName(id, name);
     }
 }
