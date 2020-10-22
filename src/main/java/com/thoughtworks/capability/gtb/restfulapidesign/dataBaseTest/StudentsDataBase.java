@@ -35,14 +35,17 @@ public class StudentsDataBase {
     }
 
     public static void add(Student student) {
+        if(!isInitialized) makeData();
         students.add(student);
     }
 
     public static void delete(String id) {
+        if(!isInitialized) makeData();
         students.removeIf(stu -> stu.getId().equals(id));
     }
 
     public static Student findStudentById(String id) {
+        if(!isInitialized) makeData();
         return students.stream().filter(stu -> stu.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 }

@@ -11,6 +11,10 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return StudentsDataBase.studentsProvider();
     }
+    public void updateStudent(Student student) {
+        delete(student.getId());
+        addStudent(student);
+    }
     public void addStudent(Student student) {
         StudentsDataBase.add(student);
     }

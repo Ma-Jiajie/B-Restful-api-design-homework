@@ -1,13 +1,12 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
+import com.thoughtworks.capability.gtb.restfulapidesign.controller.requestdto.StudentRequestDTO;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,5 +41,16 @@ public class StudentController {
     @DeleteMapping(value = "/student/{id}")
     public void deleteStudent(@PathVariable String id) {
         studentService.delete(id);
+    }
+
+    @PatchMapping(value = "/student/{id}")
+    public Student updateStudent(@PathVariable String id, @RequestBody StudentRequestDTO studentRequestDTO) {
+        Student student = studentService.findStudentById(id);
+        studentService.delete(id);
+        if(studentRequestDTO.getName() != null) student.setName(studentRequestDTO.getName());
+        if(studentRequestDTO.getGender() != null) student.setGender(studentRequestDTO.getGender());
+        if(studentRequestDTO.getNote() != null) student.setNote(studentRequestDTO.getNote());
+        studentService.addStudent(student);
+        return student;
     }
 }

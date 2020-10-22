@@ -1,23 +1,19 @@
-package com.thoughtworks.capability.gtb.restfulapidesign.model;
+package com.thoughtworks.capability.gtb.restfulapidesign.controller.requestdto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class StudentRequestDTO {
     @NotNull
     private String id;
-    @NotNull
     private String name;
-    @NotNull
     private Gender gender;
-    @NotNull
     private String note;
 }
