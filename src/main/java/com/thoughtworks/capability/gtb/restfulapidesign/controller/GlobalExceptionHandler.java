@@ -10,7 +10,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 import java.util.Set;
-import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.*;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.*;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

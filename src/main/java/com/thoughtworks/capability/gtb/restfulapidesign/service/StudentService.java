@@ -1,9 +1,9 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest.StudentsDataBase;
+import com.thoughtworks.capability.gtb.restfulapidesign.databasetest.StudentsDataBase;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
-import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.UserIsExistingException;
-import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.UserNotFoundException;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.UserIsExistingException;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class StudentService {
     }
     public Student findStudentById(String id) {
         Student student = StudentsDataBase.findStudentById(id);
-        if(student != null) throw new UserNotFoundException("该用户不存在");
+        if(student == null) throw new UserNotFoundException("该用户不存在");
         return student;
     }
 }

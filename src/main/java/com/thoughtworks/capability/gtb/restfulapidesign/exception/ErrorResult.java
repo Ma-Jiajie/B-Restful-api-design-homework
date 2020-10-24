@@ -1,4 +1,4 @@
-package com.thoughtworks.capability.gtb.restfulapidesign.selfexception;
+package com.thoughtworks.capability.gtb.restfulapidesign.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

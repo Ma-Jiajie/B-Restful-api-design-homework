@@ -1,12 +1,10 @@
-package com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest;
+package com.thoughtworks.capability.gtb.restfulapidesign.databasetest;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Gender;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class StudentsDataBase {
     private static final List<Student> students = new ArrayList<>();

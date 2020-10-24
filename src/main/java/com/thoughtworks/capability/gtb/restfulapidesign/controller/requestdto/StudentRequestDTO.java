@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentRequestDTO {
-    @NotNull
-    private String id;
     private String name;
     private Gender gender;
     private String note;

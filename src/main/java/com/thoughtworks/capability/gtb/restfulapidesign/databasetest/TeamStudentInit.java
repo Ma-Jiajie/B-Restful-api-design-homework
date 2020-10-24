@@ -1,8 +1,8 @@
-package com.thoughtworks.capability.gtb.restfulapidesign.dataBaseTest;
+package com.thoughtworks.capability.gtb.restfulapidesign.databasetest;
 
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Team;
-import com.thoughtworks.capability.gtb.restfulapidesign.selfexception.TeamNotFoundException;
+import com.thoughtworks.capability.gtb.restfulapidesign.exception.TeamNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

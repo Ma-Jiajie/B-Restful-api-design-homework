@@ -7,12 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping
+@RequestMapping("/students")
 @Validated
 public class StudentController {
     private final StudentService studentService;
@@ -21,30 +22,32 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/students")
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public List<Student> getAllStudents(@RequestParam(name = "gender", required = false) String gender,
-                                        @RequestParam(name = "id", required = false) String id) {
-        if(gender == null && id == null) return studentService.getAllStudents();
-        if(gender == null) return Collections.singletonList(studentService.findStudentById(id));
-        return studentService.getAllStudents().stream().filter(stu -> stu.getGender().ordinal() == Integer.parseInt(gender)).collect(Collectors.toList());
+    @GetMapping
+    public List<Student> getStudents(@RequestParam(name = "gender", required = false) String gender) {
+            if(gender == null) return studentService.getAllStudents();
+            return studentService.getAllStudents().stream().filter(stu -> stu.getGender().ordinal() == Integer.parseInt(gender)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable String id) {
+        return studentService.findStudentById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping("/student")
-    public Student addStudent(@RequestBody Student student) {
+    @PostMapping
+    public Student addStudent(@RequestBody @Valid Student student) {
         studentService.addStudent(student);
         return student;
     }
 
-    @DeleteMapping(value = "/student/{id}")
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudent(@PathVariable String id) {
         studentService.delete(id);
     }
 
-    @PatchMapping(value = "/student/{id}")
-    public Student updateStudent(@PathVariable String id, @RequestBody StudentRequestDTO studentRequestDTO) {
+    @PatchMapping("/{id}")
+    public Student updateStudent(@PathVariable String id, @RequestBody @Valid StudentRequestDTO studentRequestDTO) {
         Student student = studentService.findStudentById(id);
         studentService.delete(id);
         if(studentRequestDTO.getName() != null) student.setName(studentRequestDTO.getName());
